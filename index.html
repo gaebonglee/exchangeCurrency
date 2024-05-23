@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="exchange_box">
+      <div class="dropdown">
+        <button class="dropbtn" id="from_btn">USD</button>
+        <div class="dropdown-content" id="from-currency-list">
+          <a href="#">USD</a>
+          <a href="#">KRW</a>
+          <a href="#">VND</a>
+        </div>
+      </div>
+      <div class="input_area">
+        <input type="number" id="from_input" onkeyup="convert()" />
+        <div>달러</div>
+      </div>
+    </div>
+    <h1>=</h1>
+    <div class="exchange_box">
+      <div class="dropdown">
+        <button class="dropbtn" id="to_btn">KRW</button>
+        <div class="dropdown-content" id="to-currency-list">
+          <a href="#">USD</a>
+          <a href="#">KRW</a>
+          <a href="#">VND</a>
+        </div>
+      </div>
+      <div class="input_area">
+        <input type="number" id="to_input"  />
+        <div>달러</div>
+      </div>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>
