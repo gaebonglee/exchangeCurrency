@@ -146,12 +146,25 @@ function updateReciteText() {
 }
 
 function validateAndFormatInput(inputElement) {
-  let value = inputElement.value.replace(/,/g, ""); // Remove existing commas
-  value = value.replace(/[^0-9.]/g, ""); // Only allow numbers and dots
+  let value = inputElement.value.replace(/,/g, "");
+  value = value.replace(/[^0-9.]/g, "");
+
+  if (value.startsWith("0")) {
+    if (value.indexOf(".") > 1) {
+      value = value.replace(/^0+/, "0");
+    } else {
+      value = value.replace(/^0+/, "");
+    }
+  }
+
+  if (value === "") {
+    value = "0";
+  }
+
   if (value.split(".").length > 2) {
-    // If there are more than one dots, remove the last one
     value = value.replace(/\.+$/, "");
   }
+
   inputElement.value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   updateReciteText();
 }
