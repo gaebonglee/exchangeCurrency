@@ -1,6 +1,6 @@
 let currencyRatio = {
   USD: {
-    KRW: 1362.7,
+    KRW: 1376,
     USD: 1,
     JPY: 156.95,
     CNY: 7.27,
@@ -12,60 +12,60 @@ let currencyRatio = {
   KRW: {
     KRW: 1,
     USD: 0.00073,
-    JPY: 0.114,
-    CNY: 0.00528,
+    JPY: 0.11517,
+    CNY: 0.00533,
     EUR: 0.00068,
-    AUD: 0.00073,
-    NZD: 0.00063,
+    AUD: 0.0011,
+    NZD: 0.00119,
     unit: "원",
   },
   CNY: {
     KRW: 189.36,
-    USD: 0.14,
-    JPY: 21.6,
+    USD: 0.13759,
+    JPY: 21.60165,
     CNY: 1,
-    EUR: 0.13,
-    AUD: 0.21,
-    NZD: 0.22,
+    EUR: 0.12792,
+    AUD: 0.20771,
+    NZD: 0.22476,
     unit: "위안",
   },
   JPY: {
-    KRW: 8.767,
+    KRW: 8.68388,
     USD: 0.00637,
     JPY: 1,
-    CNY: 0.0463,
-    EUR: 0.00593,
-    AUD: 0.00964,
-    NZD: 0.0104,
+    CNY: 0.04625,
+    EUR: 0.00592,
+    AUD: 0.00962,
+    NZD: 0.01039,
     unit: "엔",
   },
   EUR: {
-    KRW: 1478,
-    USD: 1.074,
-    JPY: 168.66,
-    CNY: 7.809,
+    KRW: 1464.301,
+    USD: 1.07527,
+    JPY: 168.7634,
+    CNY: 7.8172,
     EUR: 1,
-    AUD: 1.626,
-    NZD: 1.755,
+    AUD: 1.62365,
+    NZD: 1.75268,
     unit: "유로",
   },
   AUD: {
-    KRW: 909,
-    USD: 0.66,
-    JPY: 103.709,
-    CNY: 4.801,
-    EUR: 0.614,
+    KRW: 902.51656,
+    USD: 0.66225,
+    JPY: 103.27815,
+    CNY: 4.81457,
+    EUR: 0.61579,
     AUD: 1,
-    NZD: 1.079,
+    NZD: 1.07947,
     unit: "달러",
   },
   NZD: {
-    KRW: 842,
-    USD: 0.612,
-    JPY: 96.09,
-    CNY: 4.448,
-    EUR: 0.569,
-    AUD: 0.926,
+    KRW: 836.68712,
+    USD: 0.6135,
+    JPY: 96.32331,
+    CNY: 4.45951,
+    EUR: 0.57055,
+    AUD: 0.92642,
     NZD: 1,
     unit: "달러",
   },
@@ -74,79 +74,106 @@ let currencyRatio = {
 let fromCurrency = "USD";
 let toCurrency = "KRW";
 
-document.getElementById("fromCurrency").addEventListener("change", function () {
-  updateCurrencyCode("from");
+document.addEventListener("DOMContentLoaded", () => {
+  updateInitialValues();
 });
 
-document.getElementById("toCurrency").addEventListener("change", function () {
-  updateCurrencyCode("to");
-});
+function updateInitialValues() {
+  const fromAmount = 1;
+  const fromCurrency = "USD";
+  const toCurrency = "KRW";
 
-function updateCurrencyCode(type) {
-  const currencySelect = document.getElementById(type + "Currency");
-  const selectedOption = currencySelect.options[currencySelect.selectedIndex];
-  const currencyCodeSpan = document.getElementById(type + "CurrencyCode");
+  document.getElementById("from_input").value = fromAmount;
+  document.getElementById("fromRecite").textContent = `${convertToKoreanUnits(
+    fromAmount
+  )} 달러`;
+  document.getElementById("fromCurrencyCode").textContent = fromCurrency;
 
-  const currencyCode = selectedOption.value;
+  const toAmount = (
+    fromAmount * currencyRatio[fromCurrency][toCurrency]
+  ).toFixed(2);
+  document.getElementById("to_input").value = toAmount
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  document.getElementById("toRecite").textContent = `${convertToKoreanUnits(
+    toAmount
+  )} 원`;
+  document.getElementById("toCurrencyCode").textContent = toCurrency;
 
-  currencyCodeSpan.textContent = currencyCode;
-
-  if (type === "from") {
-    fromCurrency = currencyCode;
-    convert();
-  } else {
-    toCurrency = currencyCode;
-    convert();
-  }
-}
-
-function truncateToTwoDecimals(value) {
-  return Math.floor(value * 100) / 100;
-}
-
-function formatNumber(value) {
-  return value.toLocaleString();
-}
-
-function convert() {
-  let amount = parseFloat(
-    document.getElementById("from_input").value.replace(/,/g, "")
-  );
-  let convertedAmount = amount * currencyRatio[fromCurrency][toCurrency];
-  convertedAmount = truncateToTwoDecimals(convertedAmount);
-
-  document.getElementById("to_input").value = formatNumber(convertedAmount);
-  document.getElementById("fromRecite").textContent = `${formatNumber(
-    amount
-  )} ${currencyRatio[fromCurrency].unit}`;
-  document.getElementById("toRecite").textContent = `${formatNumber(
-    convertedAmount
-  )} ${currencyRatio[toCurrency].unit}`;
-}
-
-function validateAndFormatInput(input) {
-  let value = input.value.replace(/,/g, "");
-  if (/^\d*\.?\d*$/.test(value)) {
-    input.value = formatNumber(value);
-    convert();
-  } else {
-    input.value = input.value.slice(0, -1);
-  }
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-  document.getElementById("from_input").value = 1;
-  document.getElementById("to_input").value = formatNumber(
-    currencyRatio[fromCurrency][toCurrency]
-  );
   document.getElementById("fromCurrency").value = fromCurrency;
   document.getElementById("toCurrency").value = toCurrency;
-  document.getElementById(
-    "fromRecite"
-  ).textContent = `1 ${currencyRatio[fromCurrency].unit}`;
-  document.getElementById("toRecite").textContent = `${formatNumber(
-    currencyRatio[fromCurrency][toCurrency]
-  )} ${currencyRatio[toCurrency].unit}`;
-  updateCurrencyCode("from");
-  updateCurrencyCode("to");
-});
+}
+
+function updateCurrencyCode(type) {
+  let selectElement, spanElement;
+
+  if (type === "from") {
+    selectElement = document.getElementById("fromCurrency");
+    spanElement = document.getElementById("fromCurrencyCode");
+  } else {
+    selectElement = document.getElementById("toCurrency");
+    spanElement = document.getElementById("toCurrencyCode");
+  }
+
+  const selectedCurrency = selectElement.value;
+  spanElement.textContent = selectedCurrency;
+  updateReciteText();
+}
+
+function updateReciteText() {
+  const fromCurrency = document.getElementById("fromCurrency").value;
+  const toCurrency = document.getElementById("toCurrency").value;
+  const fromAmount =
+    parseFloat(document.getElementById("from_input").value.replace(/,/g, "")) ||
+    0;
+
+  const fromUnit = currencyRatio[fromCurrency].unit;
+  const toUnit = currencyRatio[toCurrency].unit;
+
+  document.getElementById("fromRecite").textContent = `${convertToKoreanUnits(
+    fromAmount
+  )} ${fromUnit}`;
+
+  const toAmount = (
+    fromAmount * currencyRatio[fromCurrency][toCurrency]
+  ).toFixed(2);
+  document.getElementById("to_input").value = toAmount
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  document.getElementById("toRecite").textContent = `${convertToKoreanUnits(
+    toAmount
+  )} ${toUnit}`;
+}
+
+function validateAndFormatInput(inputElement) {
+  let value = inputElement.value.replace(/,/g, ""); // Remove existing commas
+  value = value.replace(/[^0-9.]/g, ""); // Only allow numbers and dots
+  if (value.split(".").length > 2) {
+    // If there are more than one dots, remove the last one
+    value = value.replace(/\.+$/, "");
+  }
+  inputElement.value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  updateReciteText();
+}
+
+function convertToKoreanUnits(number) {
+  number = parseFloat(number);
+  if (number < 10000) {
+    return number.toLocaleString();
+  }
+
+  const units = ["", "만", "억", "조"];
+  let result = "";
+  let unitIndex = 0;
+
+  while (number > 0) {
+    const chunk = number % 10000;
+    if (chunk > 0) {
+      result = `${chunk.toLocaleString()}${units[unitIndex]} ${result}`.trim();
+    }
+    number = Math.floor(number / 10000);
+    unitIndex++;
+  }
+
+  return result.trim();
+}
