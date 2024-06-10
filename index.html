@@ -11,63 +11,65 @@
     />
   </head>
   <body>
-    <div class="exchangeBox_container">
-      <div class="exchange_box">
-        <div class="dropdown">
-          <button class="dropbtn" id="from_btn">
-            <span class="country-name">미국</span>
-            <span class="currency-code">USD</span
-            ><i class="ri-arrow-down-s-line"></i>
-          </button>
-          <div class="dropdown-content" id="from-currency-list">
-            <a href="#" data-country="미국" data-currency="USD"
-              ><span class="country-name">미국</span>
-              <span class="currency-code">USD</span></a
-            >
-            <a href="#" data-country="한국" data-currency="KRW"
-              ><span class="country-name">한국</span>
-              <span class="currency-code">KRW</span></a
-            >
-            <a href="#" data-country="베트남" data-currency="VND"
-              ><span class="country-name">베트남</span>
-              <span class="currency-code">VND</span></a
-            >
+    <section class="exchange_section">
+      <div class="exchangeBox_container">
+        <div class="boxTitle">
+          <h2>환율계산</h2>
+        </div>
+        <div class="exchange_box">
+          <div class="exchange_boxInner">
+            <div class="excr_box">
+              <div class="selectWrap">
+                <span class="eng_code" id="fromCurrencyCode">USD</span>
+                <select id="fromCurrency" onchange="updateCurrencyCode('from')">
+                  <option value="USD" data-country="미국">미국</option>
+                  <option value="KRW" data-country="한국">한국</option>
+                  <option value="CNY" data-country="중국">중국</option>
+                  <option value="JPY" data-country="일본">일본</option>
+                  <option value="EUR" data-country="유럽연합">유럽연합</option>
+                  <option value="AUD" data-country="호주">호주</option>
+                  <option value="NZD" data-country="뉴질랜드">뉴질랜드</option>
+                </select>
+              </div>
+              <div class="num">
+                <input
+                  id="from_input"
+                  type="text"
+                  value="1"
+                  oninput="validateAndFormatInput(this)"
+                />
+                <div class="recite">
+                  <span id="fromRecite">1 달러</span>
+                </div>
+              </div>
+            </div>
+            <div class="excr_eq">
+              <span>=</span>
+            </div>
+            <div class="excr_box">
+              <div class="selectWrap">
+                <span class="eng_code" id="toCurrencyCode">KRW</span>
+                <select id="toCurrency" onchange="updateCurrencyCode('to')">
+                  <option value="USD" data-country="미국">미국</option>
+                  <option value="KRW" data-country="한국">한국</option>
+                  <option value="CNY" data-country="중국">중국</option>
+                  <option value="JPY" data-country="일본">일본</option>
+                  <option value="EUR" data-country="유럽연합">유럽연합</option>
+                  <option value="AUD" data-country="호주">호주</option>
+                  <option value="NZD" data-country="뉴질랜드">뉴질랜드</option>
+                </select>
+              </div>
+              <div class="num">
+                <input id="to_input" type="text" />
+                <div class="recite">
+                  <span id="toRecite">1376 원</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="input_area">
-          <input type="number" id="from_input" onkeyup="convert()" />
-          <div class="input_areaText">달러</div>
-        </div>
       </div>
-      <h2>=</h2>
-      <div class="exchange_box">
-        <div class="dropdown">
-          <button class="dropbtn" id="to_btn">
-            <span class="country-name">한국</span>
-            <span class="currency-code">KRW</span
-            ><i class="ri-arrow-down-s-line"></i>
-          </button>
-          <div class="dropdown-content" id="to-currency-list">
-            <a href="#" data-country="미국" data-currency="USD"
-              ><span class="country-name">미국</span>
-              <span class="currency-code">USD</span></a
-            >
-            <a href="#" data-country="한국" data-currency="KRW"
-              ><span class="country-name">한국</span>
-              <span class="currency-code">KRW</span></a
-            >
-            <a href="#" data-country="베트남" data-currency="VND"
-              ><span class="country-name">베트남</span>
-              <span class="currency-code">VND</span></a
-            >
-          </div>
-        </div>
-        <div class="input_area">
-          <input type="number" id="to_input" />
-          <div class="input_areaText">달러</div>
-        </div>
-      </div>
-    </div>
+    </section>
 
     <script src="main.js"></script>
   </body>
