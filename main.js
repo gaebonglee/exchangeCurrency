@@ -24,8 +24,12 @@ let toCurrency = "KRW";
 
 document.querySelectorAll("#from-currency-list a").forEach((menu) =>
   menu.addEventListener("click", function () {
-    document.getElementById("from_btn").textContent = this.textContent;
-    fromCurrency = this.textContent;
+    const country = this.getAttribute("data-country");
+    const currency = this.getAttribute("data-currency");
+    document.getElementById(
+      "from_btn"
+    ).innerHTML = `<span class="country-name">${country}</span> <span class="currency-code">${currency}</span><i class="ri-arrow-down-s-line"></i>`;
+    fromCurrency = currency;
     console.log("fromCurrency 는", fromCurrency);
     convert();
     document.querySelector("#from_input").nextElementSibling.textContent =
@@ -35,8 +39,12 @@ document.querySelectorAll("#from-currency-list a").forEach((menu) =>
 
 document.querySelectorAll("#to-currency-list a").forEach((menu) =>
   menu.addEventListener("click", function () {
-    document.getElementById("to_btn").textContent = this.textContent;
-    toCurrency = this.textContent;
+    const country = this.getAttribute("data-country");
+    const currency = this.getAttribute("data-currency");
+    document.getElementById(
+      "to_btn"
+    ).innerHTML = `<span class="country-name">${country}</span> <span class="currency-code">${currency}</span><i class="ri-arrow-down-s-line"></i>`;
+    toCurrency = currency;
     console.log("toCurrency 는", toCurrency);
     convert();
     document.querySelector("#to_input").nextElementSibling.textContent =

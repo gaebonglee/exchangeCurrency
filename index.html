@@ -3,37 +3,69 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>exchange_currency</title>
     <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/2.5.0/remixicon.css"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <div class="exchange_box">
-      <div class="dropdown">
-        <button class="dropbtn" id="from_btn">USD</button>
-        <div class="dropdown-content" id="from-currency-list">
-          <a href="#">USD</a>
-          <a href="#">KRW</a>
-          <a href="#">VND</a>
+    <div class="exchangeBox_container">
+      <div class="exchange_box">
+        <div class="dropdown">
+          <button class="dropbtn" id="from_btn">
+            <span class="country-name">미국</span>
+            <span class="currency-code">USD</span
+            ><i class="ri-arrow-down-s-line"></i>
+          </button>
+          <div class="dropdown-content" id="from-currency-list">
+            <a href="#" data-country="미국" data-currency="USD"
+              ><span class="country-name">미국</span>
+              <span class="currency-code">USD</span></a
+            >
+            <a href="#" data-country="한국" data-currency="KRW"
+              ><span class="country-name">한국</span>
+              <span class="currency-code">KRW</span></a
+            >
+            <a href="#" data-country="베트남" data-currency="VND"
+              ><span class="country-name">베트남</span>
+              <span class="currency-code">VND</span></a
+            >
+          </div>
+        </div>
+        <div class="input_area">
+          <input type="number" id="from_input" onkeyup="convert()" />
+          <div class="input_areaText">달러</div>
         </div>
       </div>
-      <div class="input_area">
-        <input type="number" id="from_input" onkeyup="convert()" />
-        <div>달러</div>
-      </div>
-    </div>
-    <h1>=</h1>
-    <div class="exchange_box">
-      <div class="dropdown">
-        <button class="dropbtn" id="to_btn">KRW</button>
-        <div class="dropdown-content" id="to-currency-list">
-          <a href="#">USD</a>
-          <a href="#">KRW</a>
-          <a href="#">VND</a>
+      <h2>=</h2>
+      <div class="exchange_box">
+        <div class="dropdown">
+          <button class="dropbtn" id="to_btn">
+            <span class="country-name">한국</span>
+            <span class="currency-code">KRW</span
+            ><i class="ri-arrow-down-s-line"></i>
+          </button>
+          <div class="dropdown-content" id="to-currency-list">
+            <a href="#" data-country="미국" data-currency="USD"
+              ><span class="country-name">미국</span>
+              <span class="currency-code">USD</span></a
+            >
+            <a href="#" data-country="한국" data-currency="KRW"
+              ><span class="country-name">한국</span>
+              <span class="currency-code">KRW</span></a
+            >
+            <a href="#" data-country="베트남" data-currency="VND"
+              ><span class="country-name">베트남</span>
+              <span class="currency-code">VND</span></a
+            >
+          </div>
         </div>
-      </div>
-      <div class="input_area">
-        <input type="number" id="to_input"  />
-        <div>달러</div>
+        <div class="input_area">
+          <input type="number" id="to_input" />
+          <div class="input_areaText">달러</div>
+        </div>
       </div>
     </div>
 

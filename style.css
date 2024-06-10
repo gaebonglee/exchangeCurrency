@@ -1,28 +1,66 @@
+.exchangeBox_container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 700px;
+}
+
+.exchangeBox_container > h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: gray;
+}
+
 .exchange_box {
   display: flex;
-  border: 1px solid black;
-  width: 400px;
-}
-.dropbtn {
-  background-color: #4caf50;
-  color: white;
-  padding: 15px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
+  border: 1px solid lightgray;
+  border-radius: 10px;
   width: 100%;
 }
 
 .dropdown {
+  background-color: rgb(225, 225, 225);
   position: relative;
   display: inline-block;
+  width: 45%;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+
+  > select{
+    border: none;
+  }
+}
+
+.dropbtn {
+  background-color: rgb(225, 225, 225);
+  color: black;
+  padding: 15px;
+  font-size: 16px;
+  border: none;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  cursor: pointer;
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.country-name {
+  color: black;
+}
+
+.currency-code {
+  color: gray;
 }
 
 .dropdown-content {
+  background-color: rgb(225, 225, 225);
   display: none;
   position: absolute;
-  background-color: #f9f9f9;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
@@ -44,15 +82,17 @@
   display: block;
 }
 
-.dropdown:hover .dropbtn {
-  background-color: #3e8e41;
-}
-
 .input_area {
   width: 100%;
+  padding: 0 15px;
 }
+
 .input_area input {
-  width: 90%;
+  padding: 5px;
+  border: none;
+  width: 98%;
+  font-size: 15px;
+  text-align: right;
 }
 
 input[type="number"]::-webkit-outer-spin-button,
@@ -61,3 +101,7 @@ input[type="number"]::-webkit-inner-spin-button {
   margin: 0;
 }
 
+.input_areaText {
+  padding: 5px;
+  text-align: right;
+}
